@@ -3,12 +3,12 @@ with open ("input", "r") as f:
 
 
 isBlock = 1
-string = ""
+string = []
 idd = 0
 for c in d:
     if(isBlock):
         l = int(c)
-        string += str(idd) * l
+        string += [idd] * l
         idd+=1
     else:
         l = int(c)
@@ -21,7 +21,7 @@ print(string)
 def findLastDigit(text: str):
     for i, c in enumerate(reversed(text)):
         #print(len(text) - i - 1, c)
-        if(c.isdigit()):
+        if(type(c) == int):
             return len(text) - i - 1, c
 
 
@@ -46,12 +46,14 @@ while(i < len(string)):
     i+=1
 #0099811188827773336446555566
 #0099811188827773336446555566..............
-print("".join(string))
+#print("".join(string))
 
 checksum = 0
 for i, c in enumerate(string):
     if(c != "."):
         checksum += i * int(c)
+    else:
+        break
 
 print(checksum)
 

@@ -10,33 +10,58 @@ with open ("input", "r") as f:
 backIndex = -1
 checksum = 0
 checksumInd = 0
-if((len(d)-1)%2 == 0):
+lastId = 0
+if((len(d))%2 == 0):
     # we got 1 block, 1 space arrangement
     backIndex = -1
+    IDS_TOTAL = (len(d))//2
+    
+
+    print("parity")
 else:
     backIndex = -2
+    IDS_TOTAL = (len(d)+1)//2
     # we got 1 block left
+    print("non parity")
+
 print("last block is", d[backIndex])
+print(IDS_TOTAL)
+
+backId = IDS_TOTAL -1
+frontId = 0
 
 i = 0
 
+frontAssets = int(d[0])
+
+backAssets = 0
+
+print("iterating")
 while(i < len(d)):
     if(i%2 == 0):
-        checksum+=int(d[i]) * checksumInd
-        print("added ", d[i], "to the checksum", checksum)
-        checksumInd+=1
+        ll = int(d[i])
+        for l in range(ll):
+            checksum+=frontId * checksumInd
+            print("adding id", frontId)
+            frontId+=1
+            checksumInd+=1
+
     else:
         ll = int(d[i])
-        print("adding ", ll, "back entries")
+        
         for l in range(ll):
             #             ////////////
-            checksum+=int(d[backIndex]) * checksumInd
-            print("added ", d[backIndex], "to the checksum =", checksum)
+            checksum+=backId * checksumInd
+            print("adding id", backId)
+            #print("added ", int(backId), "to the checksum =", checksum)
+            
+            backId-=1
             checksumInd+=1
             backIndex-=2
+            print(backIndex)
     
-    #if(len(d) + backIndex <= i):
-    #    break
+    if(len(d) + backIndex <= i):
+        break
 
     i+=1 
 
