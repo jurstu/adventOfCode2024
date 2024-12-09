@@ -19,7 +19,8 @@ else:
 print("last block is", d[backIndex])
 
 i = 0
-while(True):
+
+while(i < len(d)):
     if(i%2 == 0):
         checksum+=int(d[i]) * checksumInd
         print("added ", d[i], "to the checksum", checksum)
@@ -28,17 +29,19 @@ while(True):
         ll = int(d[i])
         print("adding ", ll, "back entries")
         for l in range(ll):
+            #             ////////////
             checksum+=int(d[backIndex]) * checksumInd
             print("added ", d[backIndex], "to the checksum =", checksum)
             checksumInd+=1
             backIndex-=2
     
-    if(len(d) + backIndex <= i):
-        break
+    #if(len(d) + backIndex <= i):
+    #    break
 
     i+=1 
 
 
+print(checksum)
 # 12345
 # 1..3....5
 # 153......
